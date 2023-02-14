@@ -35,11 +35,7 @@ const UserSchema = new Schema(
         min:[6, "No puede tener menos de 6 caracteres"],
         max:[13, "No puede tener mas de 6 caracteres"]
     },
-    admin:{
-        type: Boolean,
-        default: false
-    }
-},{
+    {
         timestamps:{
             createdAt:true,
             updatedAt:false,
@@ -48,4 +44,4 @@ const UserSchema = new Schema(
     }
 )
 
-module.exports = model("User", UserSchema);
+module.exports = model("Teacher", UserSchema);

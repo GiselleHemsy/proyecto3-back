@@ -4,7 +4,7 @@ const verifyRole = require("../middlewares/verifyRole");
 const router = Router();
 
 
-router.get ("/", verifyRole, getCourses);
+router.get ("/", getCourses);
 router.put ("/", verifyRole, addCourse );
 router.delete ("/", verifyRole, deleteCourse);
 router.post ("/", verifyRole, editCourse);

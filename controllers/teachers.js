@@ -1,3 +1,10 @@
+const CustomError = require("../utils/CustomError");
+const user = require ("../models/Teacher");
+
+
+
+
+
 const getTeachers = (req, res) => {
     res.status(200).json({message:"Todos los profesores"})
 }

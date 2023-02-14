@@ -1,3 +1,9 @@
+const CustomError = require("../utils/CustomError");
+const user = require ("../models/Subject");
+
+
+
+
 const getSubjects = (req, res) => {
     res.status(200).json({message:"Todas las materias"})
 }

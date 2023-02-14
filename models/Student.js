@@ -14,6 +14,12 @@ const UserSchema = new Schema(
         trim:true,
         lowercase:true
     },
+    expediente:{
+        type: Number,
+        required:[true, "El N° de expediente es obligatorio"],
+        trim:true,
+        unique:[true, "Ya existe el N° de expediente"]
+    },
     dni:{
         type:Number,
         required:[true, "El DNI es obligatorio"],
@@ -21,6 +27,14 @@ const UserSchema = new Schema(
         unique:[true, "Ya existe el DNI"],
         min:[8, "No puede tener menos de 8 caracteres"],
         max:[8, "No puede tener mas de 8 caracteres"]
+    },
+    age:{
+        type:Number,
+        required: [true, "La edad es obligatoria"],
+        trim: true,
+        min:[2, "No puede tener menos de 2 caracteres"],
+        max:[2, "No puede tener mas de 2 caracteres"]
+
     },
     email:{
         type:String,
@@ -34,12 +48,19 @@ const UserSchema = new Schema(
         trim: true,
         min:[6, "No puede tener menos de 6 caracteres"],
         max:[13, "No puede tener mas de 6 caracteres"]
+
     },
-    admin:{
+    course:{
+        type:Number,
+        required: [true, "El curso es obligatorio"],
+        trim:true
+
+    },
+    cuota:{
         type: Boolean,
-        default: false
-    }
-},{
+        required: true
+    },
+   },{
         timestamps:{
             createdAt:true,
             updatedAt:false,
@@ -48,4 +69,4 @@ const UserSchema = new Schema(
     }
 )
 
-module.exports = model("User", UserSchema);
+module.exports = model("Student", UserSchema);

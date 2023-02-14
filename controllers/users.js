@@ -1,6 +1,6 @@
 const CustomError = require("../utils/CustomError");
 const user = require ("../models/User");
-const User = require("../models/User");
+
 
 const getUsers = async (req, res) => {
     try {
@@ -19,8 +19,7 @@ const user = await newUser.save();
 if (!user) throw new CustomError ("Fallo el guardado");
 res. status(201).json({message: "El usuario se creo correctamente", user})
     } catch(error){
-        console.log(error)
-    res.status(400).json({message:error.message})
+    res.status(error.code || 500).json({message:error.message})
     }
 }
 
