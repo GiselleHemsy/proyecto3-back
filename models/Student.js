@@ -1,6 +1,6 @@
 const {Schema, model} = require ("mongoose");
 
-const UserSchema = new Schema(
+const StudentSchema = new Schema(
     {
     name:{
         type:String,
@@ -59,14 +59,13 @@ const UserSchema = new Schema(
     cuota:{
         type: Boolean,
         required: true
-    },
-   },{
-        timestamps:{
+    }},{
+    timestamps:{
             createdAt:true,
             updatedAt:false,
         },
-        versionkey:false
+        versionKey:false
     }
-)
+);
 
-module.exports = model("Student", UserSchema);
+module.exports = model("Student", StudentSchema);

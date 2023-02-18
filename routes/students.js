@@ -5,9 +5,9 @@ const router = Router();
 
 
 router.get ("/", getStudents);
-router.put ("/", verifyRole, addStudent );
+router.put ("/", verifyRole, editStudent );
 router.delete ("/", verifyRole, deleteStudent);
-router.post ("/", verifyRole, editStudent);
+router.post ("/", verifyRole, addStudent);
 
 
 module.exports = router;

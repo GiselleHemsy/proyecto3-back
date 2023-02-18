@@ -5,9 +5,9 @@ const router = Router();
 
 
 router.get ("/", getCourses);
-router.put ("/", verifyRole, addCourse );
+router.put ("/", verifyRole, editCourse );
 router.delete ("/", verifyRole, deleteCourse);
-router.post ("/", verifyRole, editCourse);
+router.post ("/", verifyRole, addCourse);
 
 
 module.exports = router;

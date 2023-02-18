@@ -1,6 +1,6 @@
-const {Schema, model} = require ("mongoose");
+const { Schema, model } = require ("mongoose");
 
-const UserSchema = new Schema(
+const TeacherSchema = new Schema(
     {
     name:{
         type:String,
@@ -34,14 +34,13 @@ const UserSchema = new Schema(
         trim: true,
         min:[6, "No puede tener menos de 6 caracteres"],
         max:[13, "No puede tener mas de 6 caracteres"]
+    }},{
+    timestamps:{
+        createdAt:true,
+        updatedAt:false,
     },
-    {
-        timestamps:{
-            createdAt:true,
-            updatedAt:false,
-        },
-        versionkey:false
-    }
-)
+    versionKey:false
+}
+);
 
-module.exports = model("Teacher", UserSchema);
+module.exports = model("Teacher", TeacherSchema);

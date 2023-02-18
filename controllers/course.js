@@ -1,5 +1,5 @@
 const CustomError = require("../utils/CustomError");
-const user = require ("../models/Course");
+const Course = require ("../models/Course");
 
 
 

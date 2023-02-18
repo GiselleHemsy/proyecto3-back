@@ -1,19 +1,19 @@
 const {Schema, model} = require ("mongoose");
 
-const UserSchema = new Schema(
+const SubjectSchema = new Schema(
     {
     name:{
         type:String,
         required:[true, "El nombre es obligatorio"],
         trim:true,
         lowercase:true
-    },{
+    }},{
         timestamps:{
             createdAt:true,
             updatedAt:false,
         },
-        versionkey:false
+        versionKey:false
     }
-)
+);
 
-module.exports = model("Subject", UserSchema);
+module.exports = model("Subject", SubjectSchema);

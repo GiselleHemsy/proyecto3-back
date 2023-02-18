@@ -1,51 +1,66 @@
-const {Schema, model} = require ("mongoose");
+const { Schema, model } = require("mongoose");
 
 const UserSchema = new Schema(
-    {
-    name:{
-        type:String,
-        required:[true, "El nombre es obligatorio"],
-        trim:true,
-        lowercase:true
+  {
+    name: {
+      type: String,
+      required: [true, "El nombre es obligatorio"],
+      trim: true,
+      lowercase: true,
+      minLength: [2, "Debe tener al menos dos caracteres"],
+      maxLength: [30, "Debe tener como máximo treinta caracteres"],
     },
-    lastname:{
-        type:String,
-        required:[true, "El apellido es obligatorio"],
-        trim:true,
-        lowercase:true
+    lastname: {
+      type: String,
+      required: [true, "El apellido es obligatorio"],
+      trim: true,
+      lowercase: true,
+      minLength: [2, "Debe tener al menos dos caracteres"],
+      maxLength: [30, "Debe tener como máximo treinta caracteres"],
     },
-    dni:{
-        type:Number,
-        required:[true, "El DNI es obligatorio"],
-        trim:true,
-        unique:[true, "Ya existe el DNI"],
-        min:[8, "No puede tener menos de 8 caracteres"],
-        max:[8, "No puede tener mas de 8 caracteres"]
+    dni: {
+      type: Number,
+      required: [true, "El DNI es obligatorio"],
+      trim: true,
+      unique: [true, "Ya existe el DNI"],
+      min: [8, "No puede tener menos de 8 caracteres"],
+      max: [8, "No puede tener mas de 8 caracteres"],
     },
-    email:{
-        type:String,
-        required:[true, "El email es obligatorio"],
-        trim:true,
-        unique:[true, "Ya existe el email"]
+    email: {
+      type: String,
+      required: [true, "El email es obligatorio"],
+      trim: true,
+      unique: [true, "Ya existe el email"],
     },
-    tel:{
-        type:Number,
-        required: [true, "El tel es obligatorio"],
-        trim: true,
-        min:[6, "No puede tener menos de 6 caracteres"],
-        max:[13, "No puede tener mas de 6 caracteres"]
+    password: {
+      type: String,
+      trim: true,
+      required: [true, "La contraseña es obligatoria"],
     },
-    admin:{
-        type: Boolean,
-        default: false
-    }
-},{
-        timestamps:{
-            createdAt:true,
-            updatedAt:false,
-        },
-        versionkey:false
-    }
-)
+    cel: {
+      type: Number,
+      required: [true, "El tel es obligatorio"],
+      trim: true,
+      min: [9, "No puede tener menos de 9 caracteres"],
+      max: [13, "No puede tener mas de 6 caracteres"],
+    },
+    admin: {
+      type: Boolean,
+      default: false,
+    },
+},
+{
+    timestamps: {
+        createdAt: true,
+        updatedAt: false,
+    },
+        versionKey: false,
+  }
+);
+
+UserSchema.methods.toJSON = function () {
+  const { password, ...user } = this.toObject();
+  return user;
+};
 
 module.exports = model("User", UserSchema);
