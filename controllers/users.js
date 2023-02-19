@@ -4,6 +4,7 @@ const bcrypt = require ("bcryptjs");
 const {validatorResults} = require ("express-validator");
 const jwt = require ("jsonwebtoken");
 
+
 const getUsers = async (req, res) => {
     try {
         const users = await User.find();
@@ -13,15 +14,6 @@ const getUsers = async (req, res) => {
     }
 };
 
-// const addUser= async (req, res) =>{
-//   try{
-//     const newUser = new User(req.body);
-//     const userSaved = await newUser.save();
-//   res.status(200).json({ message: "El usuario se creo correctamente", userSaved });
-//   } catch (error) {
-//     res.status (error.code || 500).json({message:"perdon, algo salio mal"});
-//   }
-// };
 
 const addUser = async (req, res) => {
   try {
@@ -40,32 +32,10 @@ const addUser = async (req, res) => {
     const userSaved = await newUser.save();
     res.status(200).json({ message: "El usuario se creó correctamente", user: userSaved });
   } catch (error) {
-    res.status(500).json({ message: error});
+    res.status(error.code || 500).json({ message: error});
   }
 };
 
-// const addUser = async (req, res) => {
-//     try {
-//       const { name, lastname, dni, email, cel, admin, password } =req.body;
-//       const salt = await bcrypt.genSalt(10);
-//       const passwordEncrypted = await bcrypt.hash(password, salt);
-//       const newUser = new User({
-//         name,
-        // lastname,
-        // dni,
-        // email,
-        // cel,
-        // admin,
-        // password: passwordEncrypted,
-  //     });
-  //     console.log("estoy podrda!")
-  //     const userSaved = await newUser.save();
-  //     // if (!user) throw new CustomError ("Fallo el guardado");
-  //     res.status(200).json({ message: "El usuario se creo correctamente", user:newUser});
-  //   } catch (error) {
-  //     res.status (error.code || 500).json({message:error});
-  //   }
-  // };
   
   const login = async (req, res) => {
     try {
@@ -82,13 +52,29 @@ const addUser = async (req, res) => {
       res.status(error.code || 500).json({ message: error.message});
     }
   };
-const editUser = (req,res)=>{
-    res.status(200).json({message:"Se ha editado usuario"})
-}
 
-const deleteUser = (req,res)=>{
+
+const editUser = async (req,res)=>{
+  try {
+    const{email, fields}= req.body;
+    const userModified= await User.findOneAndUpdate({email},fields,{new:true});
+    res.status(200).json({message:"Se ha editado usuario", userModified})
+  } catch (error) {
+    res.status(error.code || 500).json({ message: error.message});
+  }
+};
+
+
+const deleteUser = async (req,res)=>{
+  try {
+    const {id} = req.body;
+    const UserDeleted = await User.findByIdAndDelete(id);
+    if(!UserDeleted)  throw new CustomError ("No existe el usuario", 404)
     res.status(200).json({message:"Se ha borrado un usuario"})
-}
+  } catch (error) {
+    res.status(error.code || 500).json({ message: error.message});
+  }
+};
 
 module.exports = {
     getUsers,
