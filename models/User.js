@@ -23,8 +23,8 @@ const UserSchema = new Schema(
       required: [true, "El DNI es obligatorio"],
       trim: true,
       unique: [true, "Ya existe el DNI"],
-      min: [8, "No puede tener menos de 8 caracteres"],
-      max: [8, "No puede tener mas de 8 caracteres"],
+      minLength: [8, "No puede tener menos de 8 caracteres"],
+      maxLength: [9, "No puede tener mas de 8 caracteres"],
     },
     email: {
       type: String,
@@ -41,8 +41,8 @@ const UserSchema = new Schema(
       type: Number,
       required: [true, "El tel es obligatorio"],
       trim: true,
-      min: [9, "No puede tener menos de 9 caracteres"],
-      max: [13, "No puede tener mas de 6 caracteres"],
+      minLength: [9, "No puede tener menos de 9 caracteres"],
+      maxLength: [13, "No puede tener mas de 6 caracteres"],
     },
     admin: {
       type: Boolean,
@@ -54,13 +54,13 @@ const UserSchema = new Schema(
         createdAt: true,
         updatedAt: false,
     },
-        versionKey: false,
+        // versionKey: false,
   }
 );
 
-UserSchema.methods.toJSON = function () {
-  const { password, ...user } = this.toObject();
-  return user;
-};
+// UserSchema.methods.toJSON = function () {
+//   const { password, ...user } = this.toObject();
+//   return user;
+// };
 
 module.exports = model("User", UserSchema);

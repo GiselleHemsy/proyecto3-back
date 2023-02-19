@@ -7,35 +7,65 @@ const jwt = require ("jsonwebtoken");
 const getUsers = async (req, res) => {
     try {
         const users = await User.find();
-        res.status(200).json(users);
+        res.status(200).json({users});
     } catch (error) {
-        res.status (error.code || 500).json({message:"person, algo salio mal"});
+        res.status (error.code || 500).json({message:"perdon, algo salio mal"});
     }
 };
 
+// const addUser= async (req, res) =>{
+//   try{
+//     const newUser = new User(req.body);
+//     const userSaved = await newUser.save();
+//   res.status(200).json({ message: "El usuario se creo correctamente", userSaved });
+//   } catch (error) {
+//     res.status (error.code || 500).json({message:"perdon, algo salio mal"});
+//   }
+// };
+
 const addUser = async (req, res) => {
-    try {
-      console.log("hola")
-      res.status(200).send({message:"hola"})
-      const { name, lastname, dni, email, tel, password } = req.body;
-      const salt = await bcrypt.genSalt(10);
-      const passwordEncrypted = await bcrypt.hash(password, salt);
-      const newUser = new User({
-        name,
-        lastname,
-        dni,
-        email,
-        tel,
-        admin:false,
-        password: passwordEncrypted,
-      });
-      const userSaved = await newUser.save();
-      if (!user) throw new CustomError ("Fallo el guardado");
-      res.status(200).json({ message: "El usuario se creo correctamente", user: userSaved });
-    } catch (error) {
-      res.status(error.code || 500).json({ message: error.message});
-    }
-  };
+  try {
+    const { name, lastname, dni, email, cel, admin, password } = req.body;
+    const salt = await bcrypt.genSalt(10);
+    const passwordEncrypted = await bcrypt.hash(password, salt);
+    const newUser = new User({
+      name,
+      lastname,
+      dni,
+      email,
+      cel,
+      admin,
+      password: passwordEncrypted,
+    });
+    const userSaved = await newUser.save();
+    res.status(200).json({ message: "El usuario se creó correctamente", user: userSaved });
+  } catch (error) {
+    res.status(500).json({ message: error});
+  }
+};
+
+// const addUser = async (req, res) => {
+//     try {
+//       const { name, lastname, dni, email, cel, admin, password } =req.body;
+//       const salt = await bcrypt.genSalt(10);
+//       const passwordEncrypted = await bcrypt.hash(password, salt);
+//       const newUser = new User({
+//         name,
+        // lastname,
+        // dni,
+        // email,
+        // cel,
+        // admin,
+        // password: passwordEncrypted,
+  //     });
+  //     console.log("estoy podrda!")
+  //     const userSaved = await newUser.save();
+  //     // if (!user) throw new CustomError ("Fallo el guardado");
+  //     res.status(200).json({ message: "El usuario se creo correctamente", user:newUser});
+  //   } catch (error) {
+  //     res.status (error.code || 500).json({message:error});
+  //   }
+  // };
   
   const login = async (req, res) => {
     try {
