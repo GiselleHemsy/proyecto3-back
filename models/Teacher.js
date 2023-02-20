@@ -28,7 +28,7 @@ const TeacherSchema = new Schema(
         trim:true,
         unique:[true, "Ya existe el email"]
     },
-    tel:{
+    cel:{
         type:Number,
         required: [true, "El tel es obligatorio"],
         trim: true,

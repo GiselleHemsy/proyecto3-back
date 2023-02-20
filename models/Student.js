@@ -54,7 +54,10 @@ const StudentSchema = new Schema(
         type:Number,
         required: [true, "El curso es obligatorio"],
         trim:true
-
+    },
+    cuota:{
+        type:Boolean,
+        required: [true, "La cuota es obligatorio"]
     }},{
     timestamps:{
             createdAt:true,
