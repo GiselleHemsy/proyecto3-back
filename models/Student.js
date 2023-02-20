@@ -25,15 +25,15 @@ const StudentSchema = new Schema(
         required:[true, "El DNI es obligatorio"],
         trim:true,
         unique:[true, "Ya existe el DNI"],
-        min:[8, "No puede tener menos de 8 caracteres"],
-        max:[8, "No puede tener mas de 8 caracteres"]
+        minLength:[8, "No puede tener menos de 8 caracteres"],
+        maxLength:[8, "No puede tener mas de 8 caracteres"]
     },
     age:{
         type:Number,
         required: [true, "La edad es obligatoria"],
         trim: true,
-        min:[2, "No puede tener menos de 2 caracteres"],
-        max:[2, "No puede tener mas de 2 caracteres"]
+        minLength:[2, "No puede tener menos de 2 caracteres"],
+        maxLength:[2, "No puede tener mas de 2 caracteres"]
 
     },
     email:{
@@ -42,12 +42,12 @@ const StudentSchema = new Schema(
         trim:true,
         unique:[true, "Ya existe el email"]
     },
-    tel:{
+    cel:{
         type:Number,
         required: [true, "El tel es obligatorio"],
         trim: true,
-        min:[6, "No puede tener menos de 6 caracteres"],
-        max:[13, "No puede tener mas de 6 caracteres"]
+        minLength:[6, "No puede tener menos de 6 caracteres"],
+        maxLength:[13, "No puede tener mas de 6 caracteres"]
 
     },
     course:{
@@ -55,10 +55,6 @@ const StudentSchema = new Schema(
         required: [true, "El curso es obligatorio"],
         trim:true
 
-    },
-    cuota:{
-        type: Boolean,
-        required: true
     }},{
     timestamps:{
             createdAt:true,

@@ -1,25 +1,53 @@
 const CustomError = require("../utils/CustomError");
 const Course = require ("../models/Course");
+const bcrypt = require ("bcryptjs");
+const {validatorResults} = require ("express-validator");
+const jwt = require ("jsonwebtoken");
 
 
 
 
-const getCourses = (req, res) => {
-    res.status(200).json({message:"Todos los cursos"})
-}
+const getCourses = async (req, res) => {
+    try {
+        const courses = await Course.find();
+        res.status(200).json({courses})
+    } catch (error) {
+        res.status (error.code || 500).json({message:"perdon, algo salio mal"});
+    }
+};
 
-const addCourse = (req,res)=>{
-    res.status(200).json({message:"Se ha creado un cursoun curso"})
-}
+const addCourse = async (req,res)=>{
+  try {
+    const {name} = req.body;
+    const salt = await bcrypt.genSalt(10);
+    const newCourse = new Course({name});
+    const courseSaved = await newCourse.save();
+    res.status(200).json({ message: "Se ha creado un curso", course: courseSaved });
+  } catch (error) {
+    res.status(error.code || 500).json({ message: error});
+  }
+};
 
-const editCourse = (req,res)=>{
-    res.status(200).json({message:"Se ha editado un curso"})
-}
+const editCourse = async (req,res)=>{
+  try {
+    const{name, fields}= req.body;
+    const courseModified= await Course.findOneAndUpdate({name},fields,{new:true});
+    res.status(200).json({message:"Se ha editado un curso", userModified})
+  } catch (error) {
+    res.status(error.code || 500).json({ message: error.message});
+  }
+};
 
-const deleteCourse = (req,res)=>{
+const deleteCourse = async (req,res)=>{
+  try {
+    const {id} = req.body;
+    const CourseDeleted = await User.findIdAndDelete(id);
+    if(!CourseDeleted)  throw new CustomError ("No existe el curso", 404)
     res.status(200).json({message:"Se ha borrado un curso"})
-}
-
+  } catch (error) {
+    res.status(error.code || 500).json({ message: error.message});
+  }
+};
 module.exports = {
     getCourses,
     addCourse,
