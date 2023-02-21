@@ -41,15 +41,15 @@ const StudentSchema = new Schema(
         unique:[true, "Ya existe el email"]
     },
     cel:{
-        type:Schema.Types.ObjectId,
-        ref:"Course",
+        type:Number, 
         trim:true,
         minLength:[6, "No puede tener menos de 6 caracteres"],
         maxLength:[13, "No puede tener mas de 6 caracteres"]
 
     },
     course:{
-        type:Number,
+        type:Schema.Types.ObjectId,
+        ref:"Course",
         required: [true, "El curso es obligatorio"],
         trim:true
     },

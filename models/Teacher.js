@@ -44,9 +44,8 @@ const TeacherSchema = new Schema(
         required:[true, "El estado es obligatorio"]
     },
     course:{
-        type:Schema.Type.ObjectId,
+        type:Schema.Types.ObjectId,
         ref: "course"
-
     },
     income:{
         type:Number,
