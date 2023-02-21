@@ -22,7 +22,6 @@ const StudentSchema = new Schema(
     },
     dni:{
         type:Number,
-        required:[true, "El DNI es obligatorio"],
         trim:true,
         unique:[true, "Ya existe el DNI"],
         minLength:[8, "No puede tener menos de 8 caracteres"],
@@ -30,7 +29,6 @@ const StudentSchema = new Schema(
     },
     age:{
         type:Number,
-        required: [true, "La edad es obligatoria"],
         trim: true,
         minLength:[2, "No puede tener menos de 2 caracteres"],
         maxLength:[2, "No puede tener mas de 2 caracteres"]
@@ -38,7 +36,6 @@ const StudentSchema = new Schema(
     },
     email:{
         type:String,
-        required:[true, "El email es obligatorio"],
         trim:true,
         unique:[true, "Ya existe el email"]
     },
