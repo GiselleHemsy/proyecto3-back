@@ -19,7 +19,6 @@ const getCourses = async (req, res) => {
 const addCourse = async (req,res)=>{
   try {
     const {name} = req.body;
-    const salt = await bcrypt.genSalt(10);
     const newCourse = new Course({name});
     const courseSaved = await newCourse.save();
     res.status(200).json({ message: "Se ha creado un curso", course: courseSaved });

@@ -14,11 +14,20 @@ const getStudents = async (req, res) => {
     }
 };
 
+const getCourse = async (req, res) => {
+  try {
+      const {course} = req.query;
+      const students= await Student.find({course});
+      res.status(200).json({students})
+  } catch (error) {
+      res.status (error.code || 500).json({message:"Todos los estudiantes"});
+  }
+};
+
 
 const addStudent = async (req,res)=>{
     try {
       const {name, lastname, expediente, dni, age, email, cel, course, cuota} = req.body;
-      const salt = await bcrypt.genSalt(10);
       const newStudent = new Student(
         {name, 
         lastname, 
@@ -61,6 +70,7 @@ const addStudent = async (req,res)=>{
 
 module.exports = {
     getStudents,
+    getCourse,
     addStudent,
     editStudent,
     deleteStudent

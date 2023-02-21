@@ -18,7 +18,6 @@ const getTeachers = async (req, res) => {
 const addTeacher = async (req, res) => {
     try {
       const { name, lastname, dni, email, cel} = req.body;
-      const salt = await bcrypt.genSalt(10);
       const newTeacher = new Teacher({
         name,
         lastname,

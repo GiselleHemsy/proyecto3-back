@@ -19,7 +19,6 @@ const getSubjects = async (req, res) => {
 const addSubject = async (req,res)=>{
     try {
       const {name} = req.body;
-      const salt = await bcrypt.genSalt(10);
       const newSubject = new Subject({name});
       const subjectSaved = await newSubject.save();
       res.status(200).json({ message: "Se ha creado una materia", subject: subjectSaved });
