@@ -6,13 +6,13 @@ const StudentSchema = new Schema(
         type:String,
         required:[true, "El nombre es obligatorio"],
         trim:true,
-        lowercase:true
+        uppercase:true
     },
     lastname:{
         type:String,
         required:[true, "El apellido es obligatorio"],
         trim:true,
-        lowercase:true
+        uppercase:true
     },
     expediente:{
         type: Number,

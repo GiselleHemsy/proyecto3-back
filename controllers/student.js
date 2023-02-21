@@ -10,20 +10,29 @@ const getStudents = async (req, res) => {
         const students = await Student.find();
         res.status(200).json({students})
     } catch (error) {
-        res.status (error.code || 500).json({message:"Todos los estudiantes"});
+        res.status (error.code || 500).json({message: error.message});
     }
 };
 
 const getCourse = async (req, res) => {
   try {
-      const {course} = req.query;
+      const {course} = req.params;
       const students= await Student.find({course});
       res.status(200).json({students})
   } catch (error) {
-      res.status (error.code || 500).json({message:"Todos los estudiantes"});
+      res.status (error.code || 500).json({message: error.message});
   }
 };
 
+const getStudentForEmail = async (req, res) => {
+  try {
+      const {email} = req.params;
+      const student= await Student.findOne({email});
+      res.status(200).json({student})
+  } catch (error) {
+      res.status (error.code || 500).json({ message: error.message});
+  }
+};
 
 const addStudent = async (req,res)=>{
     try {
@@ -42,7 +51,7 @@ const addStudent = async (req,res)=>{
       const studentSaved = await newStudent.save();
       res.status(200).json({ message: "Se ha creado un estudiante", student: studentSaved });
     } catch (error) {
-      res.status(error.code || 500).json({ message: error});
+      res.status(error.code || 500).json({ message: error.message});
     }
   };
 
@@ -71,6 +80,7 @@ const addStudent = async (req,res)=>{
 module.exports = {
     getStudents,
     getCourse,
+    getStudentForEmail,
     addStudent,
     editStudent,
     deleteStudent
