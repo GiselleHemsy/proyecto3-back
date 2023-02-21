@@ -19,8 +19,8 @@ const TeacherSchema = new Schema(
         required:[true, "El DNI es obligatorio"],
         trim:true,
         unique:[true, "Ya existe el DNI"],
-        min:[8, "No puede tener menos de 8 caracteres"],
-        max:[8, "No puede tener mas de 8 caracteres"]
+        minLength:[8, "No puede tener menos de 8 caracteres"],
+        maxLength:[8, "No puede tener mas de 8 caracteres"]
     },
     email:{
         type:String,
@@ -32,8 +32,28 @@ const TeacherSchema = new Schema(
         type:Number,
         required: [true, "El tel es obligatorio"],
         trim: true,
-        min:[6, "No puede tener menos de 6 caracteres"],
-        max:[13, "No puede tener mas de 6 caracteres"]
+        minLength:[6, "No puede tener menos de 6 caracteres"],
+        maxLength:[13, "No puede tener mas de 6 caracteres"]
+    },
+    adress:{
+        type:String,
+        trim:true
+    },
+    state:{
+        type:Boolean,
+        required:[true, "El estado es obligatorio"]
+    },
+    course:{
+        type:Schema.Type.ObjectId,
+        ref: "course"
+
+    },
+    income:{
+        type:Number,
+        trim:true,
+        required: [true, "La fecha de ingreso es obligatoria"],
+        minLength:[6, "No puede tener menos de 6 caracteres"],
+        maxLength:[8, "No puede tener mas de 8 caracteres"]
     }},{
     timestamps:{
         createdAt:true,

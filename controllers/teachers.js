@@ -8,7 +8,7 @@ const jwt = require ("jsonwebtoken");
 
 const getTeachers = async (req, res) => {
     try {
-        const teachers = await Teacher.find();
+        const teachers = await Teacher.find().populate("course");
         res.status(200).json({teachers});
     } catch (error) {
         res.status (error.code || 500).json({message:"perdon, algo salio mal"});

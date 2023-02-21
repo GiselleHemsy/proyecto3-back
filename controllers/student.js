@@ -7,7 +7,7 @@ const jwt = require ("jsonwebtoken");
 
 const getStudents = async (req, res) => {
     try {
-        const students = await Student.find();
+        const students = await Student.find().populate("course");
         res.status(200).json({students})
     } catch (error) {
         res.status (error.code || 500).json({message: error.message});
@@ -17,7 +17,7 @@ const getStudents = async (req, res) => {
 const getStudentByCourse = async (req, res) => {
   try {
       const {course} = req.query;
-      const students= await Student.find({course});
+      const students= await Student.find({course}).populate("course");
       res.status(200).json({students})
   } catch (error) {
       res.status (error.code || 500).json({message: error.message});
@@ -27,7 +27,7 @@ const getStudentByCourse = async (req, res) => {
 const getStudentForEmail = async (req, res) => {
   try {
       const {email} = req.query;
-      const student= await Student.find({email});
+      const student= await Student.find({email}).populate("course");
       res.status(200).json({student})
   } catch (error) {
       res.status (error.code || 500).json({ message: error.message});
