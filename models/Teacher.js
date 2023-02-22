@@ -48,7 +48,7 @@ const TeacherSchema = new Schema(
         ref: "course"
     },
     income:{
-        type:Number,
+        type:Date,
         trim:true,
         required: [true, "La fecha de ingreso es obligatoria"],
         minLength:[6, "No puede tener menos de 6 caracteres"],

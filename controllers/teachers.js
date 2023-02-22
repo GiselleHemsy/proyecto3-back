@@ -17,13 +17,17 @@ const getTeachers = async (req, res) => {
 
 const addTeacher = async (req, res) => {
     try {
-      const { name, lastname, dni, email, cel} = req.body;
+      const { name, lastname, dni, email, cel, adress, state, course, income} = req.body;
       const newTeacher = new Teacher({
         name,
         lastname,
         dni,
         email,
-        cel
+        cel,
+        adress,
+        state,
+        course,
+        income
       });
       const teacherSaved = await newTeacher.save();
       res.status(200).json({ message: "El profesor se creó correctamente", user: teacherSaved });
