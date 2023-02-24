@@ -45,7 +45,7 @@ const TeacherSchema = new Schema(
     },
     course:{
         type:Schema.Types.ObjectId,
-        ref: "course"
+        ref: "Course"
     },
     income:{
         type:Date,
