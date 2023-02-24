@@ -26,8 +26,8 @@ const getStudentByCourse = async (req, res) => {
 
 const getStudentForEmail = async (req, res) => {
   try {
-      const {email} = req.query;
-      const student= await Student.find({email}).populate("course");
+      const {email} = req.params;
+      const student= await Student.findOne({email}).populate("course");
       res.status(200).json({student})
   } catch (error) {
       res.status (error.code || 500).json({ message: error.message});
@@ -68,8 +68,8 @@ const addStudent = async (req,res)=>{
 
   const deleteStudent = async (req,res)=>{
     try {
-      const {id} = req.body;
-      const StudentDeleted = await Student.findByIdAndDelete(id);
+      const {email} = req.body;
+      const StudentDeleted = await Student.findOneAndDelete({email});
       if(!StudentDeleted)  throw new CustomError ("No existe el estudiante", 404)
       res.status(200).json({message:"Se ha borrado un estudiante"})
     } catch (error) {

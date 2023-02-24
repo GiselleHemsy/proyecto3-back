@@ -14,6 +14,16 @@ const getUsers = async (req, res) => {
     }
 };
 
+const getuserForEmail = async (req, res) => {
+  try {
+      const {email} = req.params;
+      const user= await User.findOne({email});
+      res.status(200).json({user})
+  } catch (error) {
+      res.status (error.code || 500).json({ message: error.message});
+  }
+};
+
 
 const addUser = async (req, res) => {
   try {
@@ -78,6 +88,7 @@ const deleteUser = async (req,res)=>{
 
 module.exports = {
     getUsers,
+    getuserForEmail,
     addUser,
     editUser,
     deleteUser,

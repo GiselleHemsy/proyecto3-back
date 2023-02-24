@@ -6,10 +6,10 @@ const router = Router();
 
 router.get ("/", getStudents);
 router.get ("/course", getStudentByCourse);
-router.get("/filter/email", getStudentForEmail);
+router.get("/:email?", getStudentForEmail);
 router.put ("/", verifyRole, editStudent );
 router.delete ("/", verifyRole, deleteStudent);
-router.post ("/", verifyRole, addStudent);
+router.post ("/", addStudent);
 
 
 module.exports = router;
