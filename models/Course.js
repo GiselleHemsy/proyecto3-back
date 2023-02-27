@@ -6,7 +6,7 @@ const CourseSchema = new Schema(
         type:String,
         required:[true, "El nombre es obligatorio"],
         trim:true,
-       uppercase:true
+        uppercase:true
     }},{
     timestamps:{
             createdAt:true,

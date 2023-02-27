@@ -57,7 +57,7 @@ const addUser = async (req, res) => {
       const passOk = await bcrypt.compare(password, user.password);
       if (!passOk) throw new CustomError("Contraseña incorrecta", 400);
       const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET_KEY, {expiresIn: "1h",});
-      res.status(200).json({ message: "Ingreso correcto", user, token });
+      res.status(200).json({ message: "Ingreso correcto", token, user });
     } catch (error) {
       res.status(error.code || 500).json({ message: error.message});
     }
@@ -86,11 +86,23 @@ const deleteUser = async (req,res)=>{
   }
 };
 
+const getAuthStatus=async(req, res)=>{
+  try {
+    const id = req.id;
+    const user = await User.findById(id);
+    if(!user) throw new CustomError("Autenticacion fallida0")
+    res.status(200).json({user});
+  } catch (error) {
+    res.status(error.code || 500).json({ message: error.message});
+
+  }
+}
 module.exports = {
     getUsers,
     getuserForEmail,
     addUser,
     editUser,
     deleteUser,
-    login
+    login,
+    getAuthStatus
 };
