@@ -7,6 +7,10 @@ const SubjectSchema = new Schema(
         required:[true, "El nombre es obligatorio"],
         trim:true,
         uppercase:true
+    },
+    course:{
+        type:Schema.Types.ObjectId,
+        ref: "Course"
     }},{
         timestamps:{
             createdAt:true,
