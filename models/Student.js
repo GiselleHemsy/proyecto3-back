@@ -49,9 +49,7 @@ const StudentSchema = new Schema(
     },
     course:{
         type:Schema.Types.ObjectId,
-        ref:"Course",
-        required: [true, "El curso es obligatorio"],
-        trim:true
+        ref:"Course"
     },
     cuota:{
         type:Boolean,

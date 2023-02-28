@@ -15,6 +15,16 @@ const getTeachers = async (req, res) => {
     }
 };
 
+const getTeacherByCourse = async (req, res) => {
+  try {
+      const {course} = req.query;
+      const teacher = await Teacher.find({course}).populate("course");
+      res.status(200).json({teacher})
+  } catch (error) {
+      res.status (error.code || 500).json({message: error.message});
+  }
+};
+
 const addTeacher = async (req, res) => {
     try {
       const { name, lastname, dni, email, cel, adress, state, course, income} = req.body;
@@ -61,6 +71,7 @@ const deleteTeacher = async (req,res)=>{
 
 module.exports = {
     getTeachers,
+    getTeacherByCourse,
     addTeacher,
     editTeacher,
     deleteTeacher

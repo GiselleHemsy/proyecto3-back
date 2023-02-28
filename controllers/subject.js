@@ -15,11 +15,20 @@ const getSubjects = async (req, res) => {
     }
 };
 
+const getSubjectsByCourse = async (req, res) => {
+  try {
+      const {course} = req.query;
+      const subject = await Subject.find({course}).populate("course");
+      res.status(200).json({subject})
+  } catch (error) {
+      res.status (error.code || 500).json({message: error.message});
+  }
+};
 
 const addSubject = async (req,res)=>{
     try {
-      const {name} = req.body;
-      const newSubject = new Subject({name});
+      const {name, course} = req.body;
+      const newSubject = new Subject({name, course});
       const subjectSaved = await newSubject.save();
       res.status(200).json({ message: "Se ha creado una materia", subject: subjectSaved });
     } catch (error) {
@@ -53,6 +62,7 @@ const editSubject = async (req,res)=>{
 
 module.exports = {
     getSubjects,
+    getSubjectsByCourse,
     addSubject,
     editSubject,
     deleteSubject

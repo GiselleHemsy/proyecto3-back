@@ -1,6 +1,6 @@
 const {Router} = require ("express");
 const {check} = require ("express-validator");
-const { getUsers, addUser, editUser, deleteUser, login } = require("../controllers/users");
+const { getUsers, addUser, editUser, deleteUser, login, getuserForEmail, getAuthStatus } = require("../controllers/users");
 const validateFields = require("../middlewares/validateField");
 const verifyRole = require("../middlewares/verifyRole");
 const auth = require ("../middlewares/auth");
@@ -9,6 +9,7 @@ const router = Router();
 router.get ("/", getUsers);
 router.put ("/", /*auth*/ verifyRole, editUser);
 router.delete ("/",/*auth*/ verifyRole, deleteUser);
+router.get("/:email?",getuserForEmail)
 
 router.post ("/",
 // [
@@ -29,5 +30,6 @@ router.post ("/login",[
     validateFields,
 ], login);
 
+router.get("/authStatus",auth , getAuthStatus)
 
 module.exports = router;
