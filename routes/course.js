@@ -6,7 +6,7 @@ const router = Router();
 
 router.get ("/", getCourses);
 router.put ("/", verifyRole, editCourse );
-router.delete ("/", verifyRole, deleteCourse);
+router.delete ("/", /*verifyRole,*/ deleteCourse);
 router.post ("/", verifyRole, addCourse);
 
 
