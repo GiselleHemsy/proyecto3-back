@@ -1,8 +1,10 @@
+const User = require("../models/User");
 
 
-const verifyRole = (req,res,next)=>{
-    console.log(req.body)
-    const admin = true;
+const verifyRole = async(req,res,next)=>{
+    const id = req.id
+    const user = await User.findById(id);
+    const admin = user.admin
     if(admin){
         next();
     }else{
