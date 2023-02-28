@@ -79,12 +79,14 @@ const addStudent = async (req,res)=>{
 
   const editStudent = async(req,res)=>{
     try {
-      const {email} = req.params;
-      const {fields} = req.body;
+
+      const {email, fields} = req.body;
+      console.log(email);
       const studentModified = await Student.findOne({email});
+
       if(!studentModified) throw new CustomError('No existe el estudiante solicitada',404)
-      await Student.findOneAndUpdate(email,fields);
-      res.status(200).json({message:'estudiante actualizada con éxito', studentModified});
+      await Student.findOneAndUpdate({email},fields);
+      res.status(200).json({message:'estudiante actualizado con éxito', studentModified});
     } catch (error) {
       res.status(error.code || 500).json({message:error.message});
     }

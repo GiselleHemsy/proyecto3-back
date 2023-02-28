@@ -7,9 +7,9 @@ const router = Router();
 router.get ("/", getStudents);
 router.get ("/course", getStudentByCourse);
 router.get("/:email?", getStudentForEmail);
-router.put ("/:email?", verifyRole, editStudent );
+router.put ("/", verifyRole, editStudent );
 router.delete ("/:email?", verifyRole, deleteStudent);
-router.post ("/", addStudent);
+router.post ("/", verifyRole, addStudent);
 
 
 module.exports = router;
