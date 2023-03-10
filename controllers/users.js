@@ -34,7 +34,7 @@ const getuserForEmail = async (req, res) => {
 
 const addUser = async (req, res) => {
   try {
-    const { name, lastname, dni, email, cel, admin, password } = req.body;
+    const { name, lastname, dni, email, cel, admin, password} = req.body;
     const salt = await bcrypt.genSalt(10);
     const passwordEncrypted = await bcrypt.hash(password, salt);
     const newUser = new User({
@@ -49,11 +49,22 @@ const addUser = async (req, res) => {
     const userSaved = await newUser.save();
     res.status(200).json({ message: "El usuario se creó correctamente", user: userSaved });
   } catch (error) {
-    res.status(error.code || 500).json({ message: error});
+    res
+      .status(error.code < 600 ? error.code : 500)
+      .json({ message: "Ocurrio un error. Motivo:" + error.message });
   }
 };
 
-  
+
+const editUser = async (req,res)=>{
+  try {
+    const{id, fields}= req.body;
+    const userModified= await User.findByIdAndUpdate(id,fields,{new:true});
+    res.status(200).json({message:"Se ha editado usuario", userModified})
+  } catch (error) {
+    res.status(error.code || 500).json({ message: error.message});
+  }
+};
   const login = async (req, res) => {
     try {
       const { email, password } = req.body;
@@ -71,15 +82,6 @@ const addUser = async (req, res) => {
   };
 
 
-const editUser = async (req,res)=>{
-  try {
-    const{id, fields}= req.body;
-    const userModified= await User.findByIdAndUpdate(id,fields,{new:true});
-    res.status(200).json({message:"Se ha editado usuario", userModified})
-  } catch (error) {
-    res.status(error.code || 500).json({ message: error.message});
-  }
-};
 
 
 const deleteUser = async (req,res)=>{

@@ -12,7 +12,7 @@ router.delete ("/",auth, verifyRole, deleteUser);
 router.get("/email/:email?",getuserForEmail)
 
 router.post ("/",
-// [
+[
     auth,verifyRole,
     check("name").isString().not().isEmpty().isLength({min:2, max:30}),
     check("lastname").isString().not().isEmpty().isLength({min:2, mas:30}),
@@ -20,9 +20,20 @@ router.post ("/",
     check("email").isEmail(),
     check("password").not().isEmpty().matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/),
     check("cel").isNumeric().not().isEmpty().isLength({min:9, mas:13}),
-    validateFields, 
-//  ], 
- addUser);
+    validateFields,
+    ], addUser);
+
+// // [
+//     auth,verifyRole,
+//     check("name").isString().not().isEmpty().isLength({min:2, max:30}),
+//     check("lastname").isString().not().isEmpty().isLength({min:2, mas:30}),
+//     check("dni").isNumeric().not().isEmpty().isLength({min:8, mas:8}),
+//     check("email").isEmail(),
+//     check("password").not().isEmpty().matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/),
+//     check("cel").isNumeric().not().isEmpty().isLength({min:9, mas:13}),
+//     validateFields, 
+// //  ], 
+
 
 router.post ("/login",[
     check("email").isEmail().isLength({ min: 5, max: 50 }),
