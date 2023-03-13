@@ -29,9 +29,9 @@ const addCourse = async (req,res)=>{
 
 const editCourse = async (req,res)=>{
   try {
-    const{name, fields}= req.body;
-    const courseModified= await Course.findOneAndUpdate({name},fields,{new:true});
-    res.status(200).json({message:"Se ha editado un curso", userModified})
+    const{courseId, fields}= req.body;
+    const courseModified= await Course.findByIdAndUpdate(courseId,fields,{new:true});
+    res.status(200).json({message:"Se ha editado un curso", courseModified})
   } catch (error) {
     res.status(error.code || 500).json({ message: error.message});
   }
@@ -39,10 +39,11 @@ const editCourse = async (req,res)=>{
 
 const deleteCourse = async (req,res)=>{
   try {
-    const {id} = req.body;
-    const CourseDeleted = await User.findIdAndDelete(id);
-    if(!CourseDeleted)  throw new CustomError ("No existe el curso", 404)
-    res.status(200).json({message:"Se ha borrado un curso"})
+    const {courseid} = req.headers;
+    const CourseDeleted = await Course.findOneAndDelete({_id:courseid})
+    console.log(CourseDeleted)
+    // if(!CourseDeleted)  throw new CustomError ("No existe el curso", 404)
+    // res.status(200).json({message:"Se ha borrado un curso"}, CourseDeleted)
   } catch (error) {
     res.status(error.code || 500).json({ message: error.message});
   }
