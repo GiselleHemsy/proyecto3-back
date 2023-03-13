@@ -48,6 +48,26 @@ const UserSchema = new Schema(
       type: Boolean,
       default: false,
     },
+    adress:{
+      type:String,
+      trim:true
+    },
+    state:{
+      type:Boolean,
+      required:[true, "El estado es obligatorio"],
+      default: true,
+    },
+    course:{
+      type:Schema.Types.ObjectId,
+      ref: "Course"
+    },
+    income:{
+      type:Date,
+      trim:true,
+      required: [true, "La fecha de ingreso es obligatoria"],
+      minLength:[6, "No puede tener menos de 6 caracteres"],
+      maxLength:[8, "No puede tener mas de 8 caracteres"]
+  }
 },
 {
     timestamps: {

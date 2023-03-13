@@ -6,7 +6,7 @@ const TeacherSchema = new Schema(
         type:String,
         required:[true, "El nombre es obligatorio"],
         trim:true,
-       uppercase:true
+        uppercase:true
     },
     lastname:{
         type:String,
@@ -14,13 +14,13 @@ const TeacherSchema = new Schema(
         trim:true,
         uppercase:true
     },
-    dni:{
+    id:{
         type:Number,
-        required:[true, "El DNI es obligatorio"],
+        required:[true, "por favor agrega un id"],
         trim:true,
-        unique:[true, "Ya existe el DNI"],
-        minLength:[8, "No puede tener menos de 8 caracteres"],
-        maxLength:[8, "No puede tener mas de 8 caracteres"]
+        unique:[true, "agraga un id unico"],
+        minLength:[5, "No puede tener menos de 5 caracteres"],
+        maxLength:[5, "No puede tener mas de 5 caracteres"]
     },
     email:{
         type:String,

@@ -34,7 +34,7 @@ const getuserForEmail = async (req, res) => {
 
 const addUser = async (req, res) => {
   try {
-    const { name, lastname, dni, email, cel, admin, password } = req.body;
+    const { name, lastname, dni, email, cel,adress,state,course,income, admin, password } = req.body;
     const salt = await bcrypt.genSalt(10);
     const passwordEncrypted = await bcrypt.hash(password, salt);
     const newUser = new User({
@@ -43,6 +43,10 @@ const addUser = async (req, res) => {
       dni,
       email,
       cel,
+      adress,
+      state,
+      course,
+      income,
       admin,
       password: passwordEncrypted,
     });
