@@ -8,11 +8,11 @@ const jwt = require ("jsonwebtoken");
 const getUsers = async (req, res) => {
     try {
         if (req.query.single){
-          const user = await User.findById(req.query.id);
+          const user = await User.findById(req.query.id).populate("course");
         res.status(200).json({user});
         }
         else {
-          const users = await User.find();
+          const users = await User.find().populate("course");
         res.status(200).json({users});
         }
 
@@ -24,7 +24,7 @@ const getUsers = async (req, res) => {
 const getuserForEmail = async (req, res) => {
   try {
       const {email} = req.params;
-      const user= await User.findOne({email});
+      const user= await User.findOne({email}).populate("course");
       res.status(200).json({user})
   } catch (error) {
       res.status (error.code || 500).json({ message: error.message});
