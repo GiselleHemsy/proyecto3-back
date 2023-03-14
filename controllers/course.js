@@ -39,11 +39,11 @@ const editCourse = async (req,res)=>{
 
 const deleteCourse = async (req,res)=>{
   try {
-    const {courseid} = req.headers;
-    const CourseDeleted = await Course.findOneAndDelete({_id:courseid})
+    const {courseId} = req.body;
+    const CourseDeleted = await Course.findOneAndDelete({_id:courseId})
     console.log(CourseDeleted)
-    // if(!CourseDeleted)  throw new CustomError ("No existe el curso", 404)
-    // res.status(200).json({message:"Se ha borrado un curso"}, CourseDeleted)
+    if(!CourseDeleted)  throw new CustomError ("No existe el curso", 404)
+    res.status(200).json({message:"Se ha borrado un curso", CourseDeleted})
   } catch (error) {
     res.status(error.code || 500).json({ message: error.message});
   }
