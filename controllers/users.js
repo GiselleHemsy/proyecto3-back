@@ -75,6 +75,7 @@ const editUser = async (req,res)=>{
       if (!email || !password)
         throw new CustomError("Usuario y contraseña son requeridas", 400);
       const user = await User.findOne({ email });
+      if(!user.state) throw new CustomError("Usuario no habilitado", 401);
       if (!user) throw new CustomError("Usuario no encontrado", 404);
       const passOk = await bcrypt.compare(password, user.password);
       if (!passOk) throw new CustomError("Contraseña incorrecta", 400);
