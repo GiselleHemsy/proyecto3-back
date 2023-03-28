@@ -70,7 +70,6 @@ const addStudent = async (req,res)=>{
     try {
 
       const {email, fields} = req.body;
-      console.log(email);
       const studentModified = await Student.findOne({email});
 
       if(!studentModified) throw new CustomError('No existe el estudiante solicitada',404)
