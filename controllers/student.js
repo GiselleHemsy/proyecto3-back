@@ -66,17 +66,6 @@ const addStudent = async (req,res)=>{
     }
   };
 
-
-  // const editStudent = async (req,res)=>{
-  //   try {
-  //     const{email, fields}= req.body;
-  //     const studentModified= await Student.findOneAndUpdate({email:email},fields,{new:true});
-  //     res.status(200).json({message:"Se ha editado estudiante", studentModified})
-  //   } catch (error) {
-  //     res.status(error.code || 500).json({ message: error.message});
-  //   }
-  // };
-
   const editStudent = async(req,res)=>{
     try {
 

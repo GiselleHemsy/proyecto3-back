@@ -74,13 +74,10 @@ const UserSchema = new Schema(
         createdAt: true,
         updatedAt: false,
     },
-        // versionKey: false,
+  
   }
 );
 
-// UserSchema.methods.toJSON = function () {
-//   const { password, ...user } = this.toObject();
-//   return user;
-// };
+
 
 module.exports = model("User", UserSchema);
